@@ -499,31 +499,6 @@ const norm = (v) =>
     //   c2n: "낚시",
     // },
     {
-      cId: "100005879",
-      c3n: "낚시 가방",
-      categorieList: null,
-    },
-    {
-      cId: "200075142",
-      c3n: "낚시 도구",
-      categorieList: null,
-    },
-    {
-      cId: "13004", // 낚시 로프
-      c3n: "낚시 로프",
-      categorieList: null,
-    },
-    {
-      cId: "100005542", // 낚시 릴 4651개
-      c3n: "낚시 릴",
-      categorieList: null,
-    },
-    {
-      cId: "100005544", // 낚시 미끼 4651개
-      c3n: "낚시 미끼",
-      categorieList: null,
-    },
-    {
       cId: "201172009", // 낚시 액세서리
       c3n: "낚시 액세서리",
       categorieList: [
@@ -545,7 +520,6 @@ const norm = (v) =>
         },
       ],
     },
-
     {
       cId: "201170705", // 낚시 의류&용품
       c3n: "낚시 의류&용품",
@@ -609,45 +583,71 @@ const norm = (v) =>
       ],
     },
     {
-      cId: "100007482",
-      c3n: "낚시 의자",
+      cId: "100005879",
+      c3n: "낚시 가방",
       categorieList: null,
     },
     {
-      cId: "100007201",
-      c3n: "낚시 찌",
+      cId: "200075142",
+      c3n: "낚시 도구",
       categorieList: null,
     },
-    {
-      cId: "100005541",
-      c3n: "낚시 줄",
-      categorieList: null,
-    },
-    {
-      cId: "100005543",
-      c3n: "낚시대",
-      categorieList: null,
-    },
-    {
-      cId: "200003838",
-      c3n: "낚시대 세트",
-      categorieList: null,
-    },
-    {
-      cId: "100005539",
-      c3n: "낚시바늘",
-      categorieList: null,
-    },
-    {
-      cId: "200002213",
-      c3n: "어군탐지기",
-      categorieList: null,
-    },
-    {
-      cId: "100005546",
-      c3n: "태클박스",
-      categorieList: null,
-    },
+    // -------------------------------------------------------------- 1 -----------------------------------------------------
+    // {
+    //   cId: "13004", // 낚시 로프
+    //   c3n: "낚시 로프",
+    //   categorieList: null,
+    // },
+    // {
+    //   cId: "100005542", // 낚시 릴 4651개
+    //   c3n: "낚시 릴",
+    //   categorieList: null,
+    // },
+    // {
+    //   cId: "100005544", // 낚시 미끼 4651개
+    //   c3n: "낚시 미끼",
+    //   categorieList: null,
+    // },
+    // {
+    //   cId: "100007482",
+    //   c3n: "낚시 의자",
+    //   categorieList: null,
+    // },
+    // {
+    //   cId: "100007201",
+    //   c3n: "낚시 찌",
+    //   categorieList: null,
+    // },
+    // {
+    //   cId: "100005541",
+    //   c3n: "낚시 줄",
+    //   categorieList: null,
+    // },
+    // {
+    //   cId: "100005543",
+    //   c3n: "낚시대",
+    //   categorieList: null,
+    // },
+    // {
+    //   cId: "200003838",
+    //   c3n: "낚시대 세트",
+    //   categorieList: null,
+    // },
+    // {
+    //   cId: "100005539",
+    //   c3n: "낚시바늘",
+    //   categorieList: null,
+    // },
+    // {
+    //   cId: "200002213",
+    //   c3n: "어군탐지기",
+    //   categorieList: null,
+    // },
+    // {
+    //   cId: "100005546",
+    //   c3n: "태클박스",
+    //   categorieList: null,
+    // },
   ];
 
   const categoryItem = divided;
