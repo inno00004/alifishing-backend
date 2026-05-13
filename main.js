@@ -727,13 +727,13 @@ const norm = (v) =>
   // 단일 데이터베이스 요청
 
   // const categoryRes = async () => {
-  //   let res = await ProductDetail.find({ _id: "1005007299104458" })
+  //   let res = await ProductDetail.find({ _id: "1005012200259825" })
   //     .populate("cId1", "cId cn")
   //     .populate("cId2", "cId cn")
   //     .lean({ virtuals: true });
 
   //   // listTasks.item.push(...items);
-  //   listTasks.dataBaseRes.push({ _id: "1005007299104458" });
+  //   listTasks.dataBaseRes.push({ _id: "1005012200259825" });
   //   listTasks.dataBaseRes.push(...res);
   // };
 
@@ -1003,7 +1003,7 @@ const norm = (v) =>
           });
 
           // 4) 기존 문서의 sku_id 집합만 얇게 조회 — 경로 "sku_info.sil"
-          const doc = await ProductDetail.findById(productId)
+          let doc = await ProductDetail.findById(productId)
             .select(
               "sku_info.sil.c sku_info.sil.sp sku_info.sil.pd sku_info.sil.spKey",
             )
@@ -1226,7 +1226,12 @@ const norm = (v) =>
               },
             }));
 
-            if (!doc.sku_info) doc.sku_info = {};
+            if (!doc) {
+              doc = {};
+            }
+
+            if (!doc?.sku_info) doc.sku_info = {};
+
             if (!Array.isArray(doc.sku_info.sil)) doc.sku_info.sil = [];
 
             doc.sku_info.sil.push(...toPushLocal);
