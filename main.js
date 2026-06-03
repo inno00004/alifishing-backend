@@ -498,6 +498,7 @@ const norm = (v) =>
     //   cId: "100005537",
     //   c2n: "낚시",
     // },
+    // ---
     // {
     //   cId: "201172009", // 낚시 액세서리
     //   c3n: "낚시 액세서리",
@@ -521,21 +522,15 @@ const norm = (v) =>
     //   ],
     // },
     // {
-    //   cId: "100005879",
-    //   c3n: "낚시 가방",
-    //   categorieList: null,
-    // },
-    // {
     //   cId: "13004", // 낚시 로프
     //   c3n: "낚시 로프",
     //   categorieList: null,
     // },
     // {
-    //   cId: "100005542", // 낚시 릴 4651개
-    //   c3n: "낚시 릴",
+    //   cId: "100005544", // 낚시 미끼 4651개
+    //   c3n: "낚시 미끼",
     //   categorieList: null,
     // },
-
     // ---------------------------------------------1 --------------------------------------------
     {
       cId: "201170705", // 낚시 의류&용품
@@ -609,14 +604,25 @@ const norm = (v) =>
       c3n: "어군탐지기",
       categorieList: null,
     },
+    {
+      cId: "201273883",
+      c3n: "낚시화",
+      categorieList: null,
+    },
     // },
-    // -------------------------------------------------------------- 2 -----------------------------------------------------
+    // -
+    // ------------------------------------------------------------- 2 -----------------------------------------------------
     // {
-    //   cId: "100005544", // 낚시 미끼 4651개
-    //   c3n: "낚시 미끼",
+    //   cId: "100005542", // 낚시 릴 4651개
+    //   c3n: "낚시 릴",
     //   categorieList: null,
     // },
-    //     {
+    // {
+    //   cId: "100005879",
+    //   c3n: "낚시 가방",
+    //   categorieList: null,
+    // },
+    // {
     //   cId: "200003838",
     //   c3n: "낚시대 세트",
     //   categorieList: null,
@@ -670,75 +676,75 @@ const norm = (v) =>
 
   // listTasks.item.push(...c1nItem.items);
 
-  const categoryRes = categoryItem
-    // .slice(Math.round(divided[10].length / 2), Math.round(divided[10].length))
-    .map((item) =>
-      limit(async () => {
-        if (item?.categorieList?.length >= 1) {
-          for (let category of item.categorieList) {
-            const res = await ProductDetail.find({
-              c4n: category.c4n,
-            })
-              .populate("cId1", "cId cn")
-              .populate("cId2", "cId cn")
-              .select("_id vol")
-              .lean();
+  // const categoryRes = categoryItem
+  //   // .slice(Math.round(divided[10].length / 2), Math.round(divided[10].length))
+  //   .map((item) =>
+  //     limit(async () => {
+  //       if (item?.categorieList?.length >= 1) {
+  //         for (let category of item.categorieList) {
+  //           const res = await ProductDetail.find({
+  //             c4n: category.c4n,
+  //           })
+  //             .populate("cId1", "cId cn")
+  //             .populate("cId2", "cId cn")
+  //             .select("_id vol")
+  //             .lean();
 
-            const { items, raw, serverCount, filteredCount, note } =
-              await fetchByCategory({
-                categoryId: category.cId,
-              });
+  //           const { items, raw, serverCount, filteredCount, note } =
+  //             await fetchByCategory({
+  //               categoryId: category.cId,
+  //             });
 
-            console.log("cid:", category?.cId);
-            console.log("CN:", category?.c4n);
-            console.log("items:", items?.length);
-            console.log("serverCount:", serverCount);
-            console.log("filteredCount:", filteredCount);
-            console.log("res:", res?.length);
+  //           console.log("cid:", category?.cId);
+  //           console.log("CN:", category?.c4n);
+  //           console.log("items:", items?.length);
+  //           console.log("serverCount:", serverCount);
+  //           console.log("filteredCount:", filteredCount);
+  //           console.log("res:", res?.length);
 
-            listTasks.item.push(...items);
-            listTasks.dataBaseRes.push(...res);
-          }
-        } else {
-          const res = await ProductDetail.find({
-            c3n: item.c3n,
-          })
-            .populate("cId1", "cId cn")
-            .populate("cId2", "cId cn")
-            .select("_id vol")
-            .lean();
+  //           listTasks.item.push(...items);
+  //           listTasks.dataBaseRes.push(...res);
+  //         }
+  //       } else {
+  //         const res = await ProductDetail.find({
+  //           c3n: item.c3n,
+  //         })
+  //           .populate("cId1", "cId cn")
+  //           .populate("cId2", "cId cn")
+  //           .select("_id vol")
+  //           .lean();
 
-          const { items, raw, serverCount, filteredCount, note } =
-            await fetchByCategory({
-              categoryId: item.cId,
-            });
-          console.log("cid:", item?.cId);
-          console.log("cn:", item?.c3n);
-          console.log("items:", items?.length);
-          console.log("res:", res?.length);
+  //         const { items, raw, serverCount, filteredCount, note } =
+  //           await fetchByCategory({
+  //             categoryId: item.cId,
+  //           });
+  //         console.log("cid:", item?.cId);
+  //         console.log("cn:", item?.c3n);
+  //         console.log("items:", items?.length);
+  //         console.log("res:", res?.length);
 
-          listTasks.item.push(...items);
-          listTasks.dataBaseRes.push(...res);
-        }
+  //         listTasks.item.push(...items);
+  //         listTasks.dataBaseRes.push(...res);
+  //       }
 
-        //  fetchByCategory안에 filtered 변수도 볼 것 !
+  //       //  fetchByCategory안에 filtered 변수도 볼 것 !
 
-        //  fetchByCategory 에서 요청을 volume 이 170 이상인것만 받아옴 수정할려면 normalize함수 볼 것
-      }),
-    );
+  //       //  fetchByCategory 에서 요청을 volume 이 170 이상인것만 받아옴 수정할려면 normalize함수 볼 것
+  //     }),
+  //   );
 
-  await Promise.allSettled(categoryRes);
+  // await Promise.allSettled(categoryRes);
 
   // 단일 데이터베이스 요청
 
   // const categoryRes = async () => {
-  //   let res = await ProductDetail.find({ _id: "1005012200259825" })
+  //   let res = await ProductDetail.find({ _id: "1005008787750581" })
   //     .populate("cId1", "cId cn")
   //     .populate("cId2", "cId cn")
   //     .lean({ virtuals: true });
 
   //   // listTasks.item.push(...items);
-  //   listTasks.dataBaseRes.push({ _id: "1005012200259825" });
+  //   listTasks.dataBaseRes.push({ _id: "1005008787750581" });
   //   listTasks.dataBaseRes.push(...res);
   // };
 
