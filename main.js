@@ -676,64 +676,64 @@ const norm = (v) =>
 
   // listTasks.item.push(...c1nItem.items);
 
-  // const categoryRes = categoryItem
-  //   // .slice(Math.round(divided[10].length / 2), Math.round(divided[10].length))
-  //   .map((item) =>
-  //     limit(async () => {
-  //       if (item?.categorieList?.length >= 1) {
-  //         for (let category of item.categorieList) {
-  //           const res = await ProductDetail.find({
-  //             c4n: category.c4n,
-  //           })
-  //             .populate("cId1", "cId cn")
-  //             .populate("cId2", "cId cn")
-  //             .select("_id vol")
-  //             .lean();
+  const categoryRes = categoryItem
+    // .slice(Math.round(divided[10].length / 2), Math.round(divided[10].length))
+    .map((item) =>
+      limit(async () => {
+        if (item?.categorieList?.length >= 1) {
+          for (let category of item.categorieList) {
+            const res = await ProductDetail.find({
+              c4n: category.c4n,
+            })
+              .populate("cId1", "cId cn")
+              .populate("cId2", "cId cn")
+              .select("_id vol")
+              .lean();
 
-  //           const { items, raw, serverCount, filteredCount, note } =
-  //             await fetchByCategory({
-  //               categoryId: category.cId,
-  //             });
+            const { items, raw, serverCount, filteredCount, note } =
+              await fetchByCategory({
+                categoryId: category.cId,
+              });
 
-  //           console.log("cid:", category?.cId);
-  //           console.log("CN:", category?.c4n);
-  //           console.log("items:", items?.length);
-  //           console.log("serverCount:", serverCount);
-  //           console.log("filteredCount:", filteredCount);
-  //           console.log("res:", res?.length);
+            console.log("cid:", category?.cId);
+            console.log("CN:", category?.c4n);
+            console.log("items:", items?.length);
+            console.log("serverCount:", serverCount);
+            console.log("filteredCount:", filteredCount);
+            console.log("res:", res?.length);
 
-  //           listTasks.item.push(...items);
-  //           listTasks.dataBaseRes.push(...res);
-  //         }
-  //       } else {
-  //         const res = await ProductDetail.find({
-  //           c3n: item.c3n,
-  //         })
-  //           .populate("cId1", "cId cn")
-  //           .populate("cId2", "cId cn")
-  //           .select("_id vol")
-  //           .lean();
+            listTasks.item.push(...items);
+            listTasks.dataBaseRes.push(...res);
+          }
+        } else {
+          const res = await ProductDetail.find({
+            c3n: item.c3n,
+          })
+            .populate("cId1", "cId cn")
+            .populate("cId2", "cId cn")
+            .select("_id vol")
+            .lean();
 
-  //         const { items, raw, serverCount, filteredCount, note } =
-  //           await fetchByCategory({
-  //             categoryId: item.cId,
-  //           });
-  //         console.log("cid:", item?.cId);
-  //         console.log("cn:", item?.c3n);
-  //         console.log("items:", items?.length);
-  //         console.log("res:", res?.length);
+          const { items, raw, serverCount, filteredCount, note } =
+            await fetchByCategory({
+              categoryId: item.cId,
+            });
+          console.log("cid:", item?.cId);
+          console.log("cn:", item?.c3n);
+          console.log("items:", items?.length);
+          console.log("res:", res?.length);
 
-  //         listTasks.item.push(...items);
-  //         listTasks.dataBaseRes.push(...res);
-  //       }
+          listTasks.item.push(...items);
+          listTasks.dataBaseRes.push(...res);
+        }
 
-  //       //  fetchByCategory안에 filtered 변수도 볼 것 !
+        //  fetchByCategory안에 filtered 변수도 볼 것 !
 
-  //       //  fetchByCategory 에서 요청을 volume 이 170 이상인것만 받아옴 수정할려면 normalize함수 볼 것
-  //     }),
-  //   );
+        //  fetchByCategory 에서 요청을 volume 이 170 이상인것만 받아옴 수정할려면 normalize함수 볼 것
+      }),
+    );
 
-  // await Promise.allSettled(categoryRes);
+  await Promise.allSettled(categoryRes);
 
   // 단일 데이터베이스 요청
 
