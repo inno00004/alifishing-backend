@@ -24,6 +24,7 @@ import {
 import { withRetry } from "./utils/withRetry.js";
 import { fetchByCategory } from "./utils/fetchByCategory.js";
 import { computePriceFields } from "./utils/computePriceFields.js";
+import { convertBrandNamesToKorean } from "./utils/convertBrandNamesToKorean.js";
 
 const SYNONYM_KEY_MAP = { 색깔: "색상" };
 
@@ -477,22 +478,6 @@ const norm = (v) =>
 (async () => {
   await dbConnect();
 
-  // const divided = [
-  //   // ------------------------- 여성 의류 -----------------------------
-
-  //   {
-  //     cId: "200075142", // 낚시
-  //     cn: "낚시 도구",
-  //     categorieList: [
-  //       {
-  //         cId: "200075142", // 가죽
-  //         cn: "낚시 도구",
-  //       },
-  //     ],
-  //   },
-  //   {},
-  // ];
-
   const divided = [
     // {
     //   cId: "100005537",
@@ -609,8 +594,7 @@ const norm = (v) =>
       c3n: "낚시화",
       categorieList: null,
     },
-    // },
-    // -
+
     // ------------------------------------------------------------- 2 -----------------------------------------------------
     // {
     //   cId: "100005542", // 낚시 릴 4651개
@@ -738,13 +722,13 @@ const norm = (v) =>
   // 단일 데이터베이스 요청
 
   // const categoryRes = async () => {
-  //   let res = await ProductDetail.find({ _id: "1005008787750581" })
+  //   let res = await ProductDetail.find({ _id: "1005009401348710" })
   //     .populate("cId1", "cId cn")
   //     .populate("cId2", "cId cn")
   //     .lean({ virtuals: true });
 
   //   // listTasks.item.push(...items);
-  //   listTasks.dataBaseRes.push({ _id: "1005008787750581" });
+  //   listTasks.dataBaseRes.push({ _id: "1005009401348710" });
   //   listTasks.dataBaseRes.push(...res);
   // };
 
@@ -969,7 +953,7 @@ const norm = (v) =>
           }
 
           if (info.title && stripForCompare(info.title) !== "") {
-            baseDoc.tt = info.title;
+            baseDoc.tt = convertBrandNamesToKorean(info.title);
           }
           if (info.product_score && Number(info.product_score) !== 0) {
             baseDoc.ps = info.product_score;
@@ -1179,6 +1163,7 @@ const norm = (v) =>
 
             console.log("item:", item._id);
             console.log("가격 바뀜");
+            // console.log("s", s);
 
             const pricePoint = {
               s: Number(s.sale_price_with_tax),
